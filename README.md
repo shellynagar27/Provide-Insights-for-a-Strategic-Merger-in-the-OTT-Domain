@@ -83,6 +83,7 @@ The project uses sample data from two databases: **`LioCinema_db`** and **`Jotst
 
 ---
 ## 🗄️Data Model
+![Screenshot 2025-03-23 203654](https://github.com/user-attachments/assets/b77e4c25-b093-4488-9c8d-65b1359b20df)
 
 ---
 ## 📌 Deliverables
