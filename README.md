@@ -1,5 +1,5 @@
 # 📊 OTT Merger Analysis: LioCinema & Jotstar
-   - [Live Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNmNlMGM5ZWMtYjFmMC00ZjcyLWFkYWItN2M4YWMzOThkZGMyIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9&pageName=5b362fc122b0b90eb8ee)
+   - [Live Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYjI5Zjk2NDEtYjEzZi00NGMzLTg5OWItMjQ1MmZjZjRhYWU5IiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9&pageName=5b362fc122b0b90eb8ee)
    - [Linkedin Post Link]()
    - [Details about complete challenge](https://codebasics.io/challenge/codebasics-resume-project-challenge)
    - [Dashboard PDF version]()
