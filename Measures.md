@@ -24,17 +24,17 @@
 
 4. **Paid Users (Two Methods)**
    a. **Method 1:**
-      ```DAX
-      Paid users_lc sp = CALCULATE([Total users_lc], 'liocinema_db subscribers'[subscription_plan] IN {"Basic", "Premium"})
-      ```
+   ```DAX
+   Paid users_lc sp = CALCULATE([Total users_lc], 'liocinema_db subscribers'[subscription_plan] IN {"Basic", "Premium"})
+   ```
    b. **Method 2:**
-      ```DAX
-      Paid users_lc using filter sp = COUNTX(
-          FILTER('liocinema_db subscribers', 'liocinema_db subscribers'[subscription_plan] IN {"Basic", "Premium"}),
-          'liocinema_db subscribers'[user_id]
-      )
-      ```
-      - Calculates paid users considering only `subscription_plan`, not `new_subscription_plan`.
+   ```DAX
+   Paid users_lc using filter sp = COUNTX(
+      FILTER('liocinema_db subscribers', 'liocinema_db subscribers'[subscription_plan] IN {"Basic", "Premium"}),
+             liocinema_db subscribers'[user_id]
+   )
+   ```
+   - Calculates paid users considering only `subscription_plan`, not `new_subscription_plan`.
 
 5. **Paid Users Considering Subscription Plan and New Subscription Plan**
    ```DAX
@@ -262,67 +262,67 @@
 
 1. **Upgrade Category** - Categorizes users as "No Change," "Downgrade," "Free to VIP," "Free to Premium," "VIP to Premium."
 2. **New Subscription Plan Update** - Updates new subscription plan values.
-3. **Revenue Calculation Column**
+3. **Revenue Calculation Column** -
 
-```DAX
-Revenue =
-VAR lastdateconsider = DATE(2024,12,31)
-
-// Old subscription plan Price (Monthly)
-VAR sp = 
-    SWITCH(
-        'jotstar_db subscribers'[subscription_plan],
-        "Premium", 359,
-        "VIP", 159,
-        0
-    )
-
-// New subscription plan Price (Monthly)
-VAR nsp = 
-    SWITCH(
-        'jotstar_db subscribers'[new_subscription_plan_update],
-        "Premium", 359,
-        "VIP", 159,
-        0
-    )
-
-// Duration Calculation for Old Plan (Months)
-VAR d1 = 
-    SWITCH(
-        TRUE(), 
-        ISBLANK('jotstar_db subscribers'[plan_change_date]) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
-            DATEDIFF('jotstar_db subscribers'[subscription_date], lastdateconsider, DAY),
-        
-        ISBLANK('jotstar_db subscribers'[plan_change_date]) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
-            DATEDIFF('jotstar_db subscribers'[subscription_date], 'jotstar_db subscribers'[last_active_date], DAY),
-        
-        NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
-            DATEDIFF('jotstar_db subscribers'[subscription_date], 'jotstar_db subscribers'[plan_change_date], DAY),
-        
-        NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
-            DATEDIFF('jotstar_db subscribers'[subscription_date], 'jotstar_db subscribers'[plan_change_date], DAY)
-    )
-
-// Duration Calculation for New Plan (Months)
-VAR d2 = 
-    SWITCH(
-        TRUE(), 
-        ISBLANK('jotstar_db subscribers'[plan_change_date]) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
-            0,
-        
-        ISBLANK('jotstar_db subscribers'[plan_change_date]) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
-            0,
-        
-        NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
-            DATEDIFF('jotstar_db subscribers'[plan_change_date], 'jotstar_db subscribers'[last_active_date], DAY),
-        
-        NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
-            DATEDIFF('jotstar_db subscribers'[plan_change_date], lastdateconsider, DAY)
-    )
-
-RETURN 
-    (d1/30 * sp) + (d2/30 * nsp)
-
-```
+   ```DAX
+   Revenue =
+   VAR lastdateconsider = DATE(2024,12,31)
+   
+   // Old subscription plan Price (Monthly)
+   VAR sp = 
+       SWITCH(
+           'jotstar_db subscribers'[subscription_plan],
+           "Premium", 359,
+           "VIP", 159,
+           0
+       )
+   
+   // New subscription plan Price (Monthly)
+   VAR nsp = 
+       SWITCH(
+           'jotstar_db subscribers'[new_subscription_plan_update],
+           "Premium", 359,
+           "VIP", 159,
+           0
+       )
+   
+   // Duration Calculation for Old Plan (Months)
+   VAR d1 = 
+       SWITCH(
+           TRUE(), 
+           ISBLANK('jotstar_db subscribers'[plan_change_date]) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
+               DATEDIFF('jotstar_db subscribers'[subscription_date], lastdateconsider, DAY),
+           
+           ISBLANK('jotstar_db subscribers'[plan_change_date]) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
+               DATEDIFF('jotstar_db subscribers'[subscription_date], 'jotstar_db subscribers'[last_active_date], DAY),
+           
+           NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
+               DATEDIFF('jotstar_db subscribers'[subscription_date], 'jotstar_db subscribers'[plan_change_date], DAY),
+           
+           NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
+               DATEDIFF('jotstar_db subscribers'[subscription_date], 'jotstar_db subscribers'[plan_change_date], DAY)
+       )
+   
+   // Duration Calculation for New Plan (Months)
+   VAR d2 = 
+       SWITCH(
+           TRUE(), 
+           ISBLANK('jotstar_db subscribers'[plan_change_date]) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
+               0,
+           
+           ISBLANK('jotstar_db subscribers'[plan_change_date]) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
+               0,
+           
+           NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && NOT(ISBLANK('jotstar_db subscribers'[last_active_date])), 
+               DATEDIFF('jotstar_db subscribers'[plan_change_date], 'jotstar_db subscribers'[last_active_date], DAY),
+           
+           NOT(ISBLANK('jotstar_db subscribers'[plan_change_date])) && ISBLANK('jotstar_db subscribers'[last_active_date]), 
+               DATEDIFF('jotstar_db subscribers'[plan_change_date], lastdateconsider, DAY)
+       )
+   
+   RETURN 
+       (d1/30 * sp) + (d2/30 * nsp)
+   
+   ```
 
 
