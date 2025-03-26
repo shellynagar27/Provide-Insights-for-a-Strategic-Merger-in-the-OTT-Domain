@@ -266,7 +266,7 @@
 
 ```DAX
 Revenue =
-VAR lastdateconsider = DATE(2024,12,31) // Correct date format
+VAR lastdateconsider = DATE(2024,12,31)
 
 // Old subscription plan Price (Monthly)
 VAR sp = 
