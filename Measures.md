@@ -72,10 +72,10 @@
    - Percentage of paid users based on `new_subscription_plan`.
 
 10. **Average Runtime of Content**
-   ```DAX
-   Avg Runtime lc = AVERAGE('liocinema_db contents'[run_time]) / 60
-   ```
-   - Converts average runtime from minutes to hours.
+    ```DAX
+    Avg Runtime lc = AVERAGE('liocinema_db contents'[run_time]) / 60
+    ```
+    - Converts average runtime from minutes to hours.
 
 11. **Total Watch Time**
     ```DAX
