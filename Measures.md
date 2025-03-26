@@ -17,10 +17,10 @@
    - Counts all unique users/subscribers on the platform.
   
 3. **Total Users (Previous Month)**
-  ```Dax
-  Total Users lc pm = CALCULATE([Total users_lc cm], DATEADD('Calendar'[Date], -1, MONTH) -- Shifts date back by 1 month
-  ```
-  - Counts all unique users/subscribers on the platform in previous month.
+   ```Dax
+   Total Users lc pm = CALCULATE([Total users_lc cm], DATEADD('Calendar'[Date], -1, MONTH) -- Shifts date back by 1 month
+   ```
+   - Counts all unique users/subscribers on the platform in previous month.
 
 4. **Paid Users (Two Methods)**
    a. **Method 1:**
